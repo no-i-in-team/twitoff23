@@ -13,15 +13,31 @@ def create_app():
 
     @app.route("/")
     def root():
-        """At endpoint '/' """
         users = User.query.all()
-        return render_template("base.html", title= "Home", users=users)
+        tweets = Tweet.query.all()
+        return render_template("base.html", title= "Home", 
+            users=users, tweets=tweets)
     
     @app.route("/reset")
     def reset():
         DB.drop_all()
         DB.create_all()
         insert_example_users()
-        return render_template("base.html", title="RESET", users=User.query.all())
+        return render_template("base.html", title="RESET",
+            users=User.query.all(), tweets=Tweet.query.all())
+
+
+    @app.route("/href/Nick")
+    def Nick():
+        return render_template("user.html", title="Nick's Tweets",
+            user=User.query.filter_by(id=1),
+            tweets=Tweet.query.filter_by(user_id=1))
+
+
+    @app.route("/href/Elon")
+    def Elon():
+        return render_template("user.html", title="Elon Musk's Tweets",
+            user=User.query.filter_by(id=2),
+            tweets=Tweet.query.filter_by(user_id=2))
 
     return app
