@@ -40,7 +40,7 @@
         <div>
           <h2>Lookup or Add</h2>
           {% for user in users %}
-          <a href="/user/{{ user.name }}"><span class="stack">{{ user.name }}</span></a>
+          <a href="/user/{{ user.name }}"><span class="stack">{{ user.full_name }}</span></a>
           {% endfor %}
           <form action="/user" method="post">
             <input type="text" name="user_name" placeholder="Username e.g. 'elonmusk' ">

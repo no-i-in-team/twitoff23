@@ -43,6 +43,7 @@ def create_app():
     @app.route("/user/<name>", methods = ["GET"])
     def user(name=None, message=""):
         name = name or request.values["user_name"]
+
         try:
             if request.method == "POST":
                 aou_user(name)
@@ -53,11 +54,12 @@ def create_app():
         except Exception as e:
             message = "Error adding '{}': {}".format(name, e)
 
-            tweets = []
+            tweets = [] 
 
-        return render_template("user.html", title=name, 
-                                            tweets=tweets, 
-                                            message=message)
+        return render_template("user.html",
+                    user=User.query.filter(User.name == name).one(), 
+                    tweets=tweets, 
+                    message=message)
 
 
     @app.route("/update")

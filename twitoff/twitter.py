@@ -21,7 +21,7 @@ def aou_user(username):
     try:
         twitter_user = TWITTER.get_user(username)
 
-        db_user = (User.query.get(twitter_user.id)) or User(id=twitter_user.id, name=username)
+        db_user = (User.query.get(twitter_user.id)) or User(id=twitter_user.id, name=username, full_name=twitter_user.name)
         
         DB.session.add(db_user)
 
