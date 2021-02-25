@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TwitOff - {{ title }}</title>
-  <link rel="stylesheet" href="https://unpkg.com/picnic" />
-</head>
-<body>
-  <nav>
-    <a href="/" class="brand"><span>TwitOff!</span></a>
-    <!-- responsive-->
-    <input id="bmenub" type="checkbox" class="show">
-    <label for="bmenub" class="burger pseudo button">Menu</label>
-    <div class="menu">
-      <a href="/update" class="button warning">Update Tweets</a>
-      <a href="/reset" class="button error">Reset Database</a>
-    </div>
-  </nav>
-
-  <article class="flex two" style="padding: 3em 1em;">
-    {% block content %}
-    <div>
-        <h2>Users</h2>
-        {% for user in users %}
-        <a href="/href/{{ user.name }}"><span class="stack">{{ user.name }} </span></a>
-        {% endfor %}
-    </div>
-    {% endblock %}
-  </article>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"/> -->
-</body>
-
+  <head>
+    <title>TwitOff! - {{ title }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic" />
+  </head>
+  <body>
+    <nav>
+      <a class="brand"><span>TwitOff!</span></a>
+      <!-- responsive-->
+      <input id="bmenub" type="checkbox" class="show">
+      <label for="bmenub" class="burger pseudo button">Menu</label>
+      <div class="menu">
+        <a href="/" class="button primary">Home</a>
+        <a href="/update" class="button success">Update Tweets</a>
+        <a href="/reset" class="button error">Reset Database</a>
+      </div>
+    </nav>
+    <article class="flex two" style="padding: 3em 1em;">
+      {% block content %}
+        <div>
+          <h2>Predict the author</h2>
+          <form action="/compare" method="post">
+            <select name="user0" required>
+              {% for user in users %}
+              <option value="">User 0</option>
+              <option value="{{ user.name }}">{{ user.name }}</option>
+              {% endfor %}
+            </select>
+            <select name="user1" required>
+              {% for user in users %}
+              <option value="">User 1</option>
+              <option value="{{ user.name }}">{{ user.name }}</option>
+              {% endfor %}
+            </select>
+            <input type="text" name="tweet_text" placeholder="Tweet e.g. 'Space is Life!' ">
+            <input type="submit" value="Whowrutit??">
+          </form>
+        </div>
+        <div>
+          <h2>Lookup or Add</h2>
+          {% for user in users %}
+          <a href="/user/{{ user.name }}"><span class="stack">{{ user.name }}</span></a>
+          {% endfor %}
+          <form action="/user" method="post">
+            <input type="text" name="user_name" placeholder="Username e.g. 'elonmusk' ">
+            <input type="submit" value="Add User">
+          </form>
+        </div>
+      {% endblock %}
+    </article>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"/> -->
+  </body>
 </html>
