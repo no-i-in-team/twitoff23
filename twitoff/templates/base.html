@@ -22,14 +22,14 @@
           <h2>Predict the author</h2>
           <form action="/compare" method="post">
             <select name="user0" required>
-              {% for user in users %}
               <option value="">User 0</option>
+              {% for user in users %}
               <option value="{{ user.name }}">{{ user.name }}</option>
               {% endfor %}
             </select>
             <select name="user1" required>
-              {% for user in users %}
               <option value="">User 1</option>
+              {% for user in users %}
               <option value="{{ user.name }}">{{ user.name }}</option>
               {% endfor %}
             </select>
