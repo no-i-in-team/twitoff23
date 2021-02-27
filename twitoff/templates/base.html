@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>TwitOff! - {{ title }}</title>
-    <link rel="stylesheet" href="https://unpkg.com/picnic" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
   <body>
     <nav>
-      <a class="brand"><span>TwitOff!</span></a>
+      <a class="brand"><span>Welcome to TwitOff {{ cred }}!</span></a>
       <!-- responsive-->
       <input id="bmenub" type="checkbox" class="show">
       <label for="bmenub" class="burger pseudo button">Menu</label>

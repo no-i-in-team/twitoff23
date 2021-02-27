@@ -1,5 +1,6 @@
 """SQLAlchemy Database"""
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 DB = SQLAlchemy()
 
@@ -26,3 +27,14 @@ class Tweet(DB.Model):
 
     def __repr__(self):
         return "<Tweet: '{}'>".format(self.text)
+
+# Login Credentials
+class Credential(UserMixin, DB.Model):
+
+    userid = DB.Column(DB.Integer, primary_key=True) #sqlite_autoincrement=True?
+    username = DB.Column(DB.String(50), unique=True)
+    password = DB.Column(DB.String(50))
+    email = DB.Column(DB.String, unique=True)
+
+    def __repr__(self):
+        return "<Credentials: '{}'>".format(self.username)
